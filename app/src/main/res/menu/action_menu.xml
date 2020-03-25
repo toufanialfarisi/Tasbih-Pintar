@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".MainActivity"
+    >
+        <item
+            android:id="@+id/switchId"
+            android:title=""
+            android:actionLayout="@layout/layout_switch"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/profil"
+            android:title="Profil"
+            app:showAsAction="never" />
+<!--        <item-->
+<!--            android:id="@+id/action_settings"-->
+<!--            android:orderInCategory="100"-->
+<!--            android:title="setting"-->
+<!--            app:showAsAction="never"/>-->
+
+</menu>

@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_list" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_list" />
+
+
 
 
 </RelativeLayout>

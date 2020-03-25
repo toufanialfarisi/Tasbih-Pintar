@@ -50,6 +50,7 @@
                     android:id="@+id/dzikir_name"
                     android:layout_below="@id/number"
                     android:textStyle="italic"
+                    android:fontFamily="@font/myfont"
                     android:textSize="20dp" />
 
                 <TextView
@@ -59,7 +60,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="120dp"
                     android:text="Tahmid (الحمدلله)"
-
+                    android:fontFamily="@font/myfont"
                     android:textColor="#FFFFFF"
                     android:layout_below="@id/dzikir_name"
                     android:textStyle="italic"
@@ -94,19 +95,22 @@
                 android:text="ذكر "
                 android:textColor="#FFFFFF"
                 android:textSize="30dp"
+                android:fontFamily="@font/myfont"
                 android:layout_centerVertical="true"
                 android:id="@+id/logo"
                 android:textStyle="bold"
                 android:layout_marginLeft="15dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/logo"
-                android:text="| Panduan lengkap"
-                android:textSize="25dp"
-                android:textColor="#FFFFFF"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/logo"
+                android:fontFamily="@font/myfont"
+                android:text="| Panduan lengkap"
+                android:textColor="#FFFFFF"
+                android:textSize="25dp" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

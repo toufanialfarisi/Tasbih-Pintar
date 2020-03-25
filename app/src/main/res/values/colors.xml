@@ -7,4 +7,7 @@
 
     <color name="start">#2196F3</color>
     <color name="end">#3F51B5</color>
+
+    <color name="start1">#2196F3</color>
+    <color name="end1">#192983</color>
 </resources>

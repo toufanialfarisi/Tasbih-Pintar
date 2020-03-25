@@ -4,7 +4,7 @@ public class DataController {
 
     public String namaDzikir;
     public String keterangan;
-    public int gambar;
+    public String gambar;
     public int numberItem;
 
 
@@ -33,11 +33,11 @@ public class DataController {
         this.keterangan = keterangan;
     }
 
-    public int getGambar() {
+    public String getGambar() {
         return gambar;
     }
 
-    public void setGambar(int gambar) {
+    public void setGambar(String gambar) {
         this.gambar = gambar;
     }
 }

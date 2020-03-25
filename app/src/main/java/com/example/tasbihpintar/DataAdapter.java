@@ -1,5 +1,6 @@
 package com.example.tasbihpintar;
 
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
                 .load(list.get(position).getGambar())
                 .into(holder.gambar);
         holder.number.setText(String.valueOf(data.numberItem));
+        holder.namaDzikir.setText(data.namaDzikir);
         holder.keterangan.setText(data.keterangan);
+
+
     }
 
     @Override
@@ -45,11 +49,12 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
 
     public class DataViewHolder extends RecyclerView.ViewHolder {
         ImageView gambar;
-        TextView number, keterangan;
+        TextView number, namaDzikir, keterangan;
         public DataViewHolder(@NonNull View itemView) {
             super(itemView);
             gambar = itemView.findViewById(R.id.img_feature);
             number = itemView.findViewById(R.id.item_number);
+            namaDzikir = itemView.findViewById(R.id.nama_dzikir);
             keterangan = itemView.findViewById(R.id.keterangan);
 
         }

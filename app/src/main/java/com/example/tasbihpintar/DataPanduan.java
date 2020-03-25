@@ -48,7 +48,7 @@ public class DataPanduan {
         ArrayList<DataController> list = new ArrayList<>();
         for (int index = 0; index < gambar.length; index++){
             DataController data = new DataController();
-            data.setGambar(gambar[index]);
+            data.setGambar(String.valueOf(gambar[index]));
             data.setKeterangan(keterangan[index]);
             data.setNamaDzikir(namaDzikir[index]);
             data.setNumberItem(index+1);

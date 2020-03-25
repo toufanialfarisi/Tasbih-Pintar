@@ -3,6 +3,7 @@ package com.example.tasbihpintar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -149,6 +150,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(panduan);
             }
         });
+
+
+
 
 
 

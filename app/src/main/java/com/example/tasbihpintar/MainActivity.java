@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else if (counter == 34){
                     namaDzikir.setText("Tahmid (الحمدلله)");
+                    number.setText(String.valueOf(34));
 
                 }
                 else if (counter == 66){
@@ -144,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     number.setText(String.valueOf(66));
                 } else if (counter == 67){
                     namaDzikir.setText("Takibr (الله أكبر)");
+                    number.setText(String.valueOf(67));
 
                 }
 

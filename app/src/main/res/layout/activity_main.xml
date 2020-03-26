@@ -108,7 +108,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/logo"
                 android:fontFamily="@font/myfont"
-                android:text="| Panduan lengkap"
+                android:text="| Panduan Bacaan"
                 android:textColor="#FFFFFF"
                 android:textSize="25dp" />
 

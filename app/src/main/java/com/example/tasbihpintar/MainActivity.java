@@ -1,8 +1,12 @@
 package com.example.tasbihpintar;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -60,6 +64,28 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.about:
+                AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
+                alBuilder.setTitle("About")
+                        .setMessage("Tasbih Pintar adalah aplikasi yang memudahkan kita semua sebagai umat muslim untuk berdzikir. Dengan adanya aplikasi ini, diharapkan semua yang menggunakan ini bisa meningkatkan ibadah kepada Allah SWT. \n\n*Dibuat dengan cinta dan iman*\nCreated by Hamba Allah Dev")
+                        .setCancelable(false)
+                        .setIcon(R.drawable.info)
+                        .setPositiveButton("Keluar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alBuilder.create();
+                alBuilder.show();
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void vibration(Vibrator vibrator, int volume){
         vibrator.vibrate(VibrationEffect.createOneShot(volume, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -70,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // GANTI FONT ACTION BAR
+        changeFontActionBar();
+        // GANTI FONT ACTION BAR
+
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -165,6 +196,31 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
+    }
+
+    public void changeFontActionBar(){
+        ActionBar ab = getSupportActionBar();
+        // Create a TextView programmatically.
+        TextView tv = new TextView(getApplicationContext());
+        // Create a LayoutParams for TextView
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
+                RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+        // Apply the layout parameters to TextView widget
+        tv.setLayoutParams(lp);
+        // Set text to display in TextView
+        tv.setText(ab.getTitle()); // ActionBar title text
+        // Set the text color of TextView to black
+        tv.setTextColor(Color.WHITE);
+        tv.setTextSize(20);
+        // Set the monospace font for TextView text
+        // This will change ActionBar title text font
+        Typeface typeface = getResources().getFont(R.font.myfont);
+        tv.setTypeface(typeface);
+        // Set the ActionBar display option
+        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        // Finally, set the newly created TextView as ActionBar custom view
+        ab.setCustomView(tv);
     }
 
 }

@@ -10,13 +10,7 @@
             android:actionLayout="@layout/layout_switch"
             app:showAsAction="always" />
         <item
-            android:id="@+id/profil"
-            android:title="Profil"
+            android:id="@+id/about"
+            android:title="About"
             app:showAsAction="never" />
-<!--        <item-->
-<!--            android:id="@+id/action_settings"-->
-<!--            android:orderInCategory="100"-->
-<!--            android:title="setting"-->
-<!--            app:showAsAction="never"/>-->
-
 </menu>

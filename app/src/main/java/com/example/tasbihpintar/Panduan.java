@@ -1,5 +1,6 @@
 package com.example.tasbihpintar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -10,6 +11,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,7 +23,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -53,22 +57,10 @@ public class Panduan extends AppCompatActivity {
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.refresh_list);
         progress = findViewById(R.id.progress);
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recycle = findViewById(R.id.recview);
         recycle.setHasFixedSize(true);
-
-/*
-ContextThemeWrapper ctw = new ContextThemeWrapper( Home.this, R.style.Theme_AlertDialog);
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ctw);
-        alertDialogBuilder.setTitle("No internet connection");
-        alertDialogBuilder.setMessage("Check your  internet connection or try again");
-        alertDialogBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-            }
-        });
-        alertDialogBuilder.show();
- */
+        changeFontActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ConnectivityManager cm =
                 (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -153,6 +145,31 @@ ContextThemeWrapper ctw = new ContextThemeWrapper( Home.this, R.style.Theme_Aler
         recycle.setLayoutManager(new GridLayoutManager(this,1));
         DataAdapter dataAdapter = new DataAdapter(list);
         recycle.setAdapter(dataAdapter);
+    }
+
+    public void changeFontActionBar(){
+        ActionBar ab = getSupportActionBar();
+        // Create a TextView programmatically.
+        TextView tv = new TextView(getApplicationContext());
+        // Create a LayoutParams for TextView
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
+                RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+        // Apply the layout parameters to TextView widget
+        tv.setLayoutParams(lp);
+        // Set text to display in TextView
+        tv.setText(ab.getTitle()); // ActionBar title text
+        // Set the text color of TextView to black
+        tv.setTextColor(Color.WHITE);
+        tv.setTextSize(20);
+        // Set the monospace font for TextView text
+        // This will change ActionBar title text font
+        Typeface typeface = getResources().getFont(R.font.myfont);
+        tv.setTypeface(typeface);
+        // Set the ActionBar display option
+        ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        // Finally, set the newly created TextView as ActionBar custom view
+        ab.setCustomView(tv);
     }
 
 

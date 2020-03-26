@@ -3,5 +3,6 @@ Tasbih Pintar adalah aplikasi berbasis Android yang dirancang untuk memudahkan u
 Maka dengan adanya aplikasi ini, diharapkan mampu meningkatkan kualitas ibadah penggunanya agar bisa meningkatkan iman
 dan taqwa selalu salah satunya dengan berdzikir. 
 
-![Home Screen](screenshots/app1.jpg | width=150)
-![Splash Screen](screenshots/app2.jpg | width=150)
+<img src="screenshots/app1.jpg" width="150px"/>
+<img src="screenshots/app2.jpg" width="150px/>  
+

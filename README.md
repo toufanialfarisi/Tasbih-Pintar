@@ -4,7 +4,17 @@ Maka dengan adanya aplikasi ini, diharapkan mampu meningkatkan kualitas ibadah p
 dan taqwa selalu salah satunya dengan berdzikir. 
 
 ### Screenshots Aplikasi
+<table>
+<tr>
+<td>
 <img src="screenshots/app2.jpg" width="150px"/>  
+</td>
+<td>
 <img src="screenshots/app1.jpg" width="150px"/>
+</td>
+</tr>
+</table>
+
+
 
 

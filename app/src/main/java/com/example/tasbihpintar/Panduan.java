@@ -56,12 +56,14 @@ public class Panduan extends AppCompatActivity {
         setContentView(R.layout.activity_panduan);
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.refresh_list);
         progress = findViewById(R.id.progress);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
         recycle = findViewById(R.id.recview);
         recycle.setHasFixedSize(true);
         changeFontActionBar();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
+
         getSupportActionBar().setTitle("Panduan Bacaan Lengkap");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ConnectivityManager cm =
                 (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);

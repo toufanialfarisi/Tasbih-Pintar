@@ -152,20 +152,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //        mBottomNav = findViewById(R.id.navigation);
 //        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 //            @Override
@@ -177,8 +163,6 @@ public class MainActivity extends AppCompatActivity {
 //                return true;
 //            }
 //        });
-
-
 
 
     }

@@ -10,11 +10,11 @@
     <androidx.cardview.widget.CardView
         android:layout_below="@id/card_view"
         android:id="@+id/card_view_2"
-        android:backgroundTint="#EAEAEA"
+        android:backgroundTint="#EFEFEF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="5dp"
         card_view:cardCornerRadius="10dp">
@@ -44,7 +44,7 @@
             android:textSize="25dp"
             android:fontFamily="@font/myfont"
             android:textStyle="bold"
-            android:background="@color/floatingColor"
+            android:background="@color/start"
             android:textColor="#FFFFFF"
             android:layout_alignParentBottom="true"
             android:gravity="center"

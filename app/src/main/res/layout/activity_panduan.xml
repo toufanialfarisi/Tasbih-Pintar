@@ -5,12 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recview"
-            android:layout_width="match_parent"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/refresh_list"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_list" />
+            tools:context="com.ryan.brooks.fropllc.frop.app.whatsGoingOnFragment"
+            android:layout_width="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_list" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 

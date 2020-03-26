@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.pusher.pushnotifications.PushNotifications;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage("Tasbih Pintar adalah aplikasi yang memudahkan kita semua sebagai umat muslim untuk berdzikir. Dengan adanya aplikasi ini, diharapkan semua yang menggunakan ini bisa meningkatkan ibadah kepada Allah SWT. \n\n*Dibuat dengan cinta dan iman*\nCreated by Hamba Allah Dev")
                         .setCancelable(false)
                         .setIcon(R.drawable.info)
-                        .setPositiveButton("Keluar", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
@@ -96,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // cloud massaging
+	// dokumentasi : https://pusher.com/tutorials/push-notifications-android 
+        PushNotifications.start(getApplicationContext(), "9dd82320-0dd9-44ff-895f-7ca048291a48");
+        PushNotifications.addDeviceInterest("hello");
 
         // GANTI FONT ACTION BAR
         changeFontActionBar();

@@ -15,8 +15,9 @@
         android:id="@+id/icon_app"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/dzikir"
-        android:layout_marginLeft="10dp"
+        android:src="@drawable/tasbih_pintar_new_white"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="10dp"
          />
     <TextView
         android:id="@+id/text_icon"

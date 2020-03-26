@@ -61,6 +61,7 @@ public class Panduan extends AppCompatActivity {
         recycle.setHasFixedSize(true);
         changeFontActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Panduan Bacaan Lengkap");
 
         ConnectivityManager cm =
                 (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);

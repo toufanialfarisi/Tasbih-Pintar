@@ -5,7 +5,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.tasbihpintar"
+        applicationId "com.makeitation.tasbihpintar"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
@@ -21,6 +21,10 @@ android {
         }
     }
 
+}
+
+repositories {
+    jcenter()
 }
 
 
@@ -48,6 +52,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-messaging:18.0.0'
     implementation 'com.pusher:push-notifications-android:1.6.2'
+    implementation "com.mlsdev.animatedrv:library:2.0.0"
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

@@ -13,6 +13,7 @@
             android:layout_centerHorizontal="true"
             />
 
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_marginTop="5dp"
             android:id="@+id/refresh_list"
@@ -20,11 +21,22 @@
             tools:context="com.ryan.brooks.fropllc.frop.app.whatsGoingOnFragment"
             android:layout_width="match_parent">
 
-                <androidx.recyclerview.widget.RecyclerView
+                <com.mlsdev.animatedrv.AnimatedRecyclerView
                     android:id="@+id/recview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/item_list" />
+                    app:animationDuration="600"
+                    tools:listitem="@layout/item_list"
+                    app:layoutAnimation="@anim/custom_layout_animation"
+                    app:layoutManagerOrientation="vertical"
+                    app:layoutManagerReverse="false"
+                    app:layoutManagerType="linear" />
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recview"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    tools:listitem="@layout/item_list" />-->
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

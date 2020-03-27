@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:269881539527:android:19f71b0f6fc5b6e21e37e2",
+        "mobilesdk_app_id": "1:269881539527:android:666896063e2acda51e37e2",
         "android_client_info": {
-          "package_name": "com.example.tasbihpintar"
+          "package_name": "com.makeitation.tasbihpintar"
         }
       },
       "oauth_client": [

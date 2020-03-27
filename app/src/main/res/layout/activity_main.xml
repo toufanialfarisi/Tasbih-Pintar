@@ -8,6 +8,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+<!--        card_view:titleTextColor="@android:color/white" />-->
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
@@ -136,6 +144,7 @@
             android:padding="8dp"
             android:elevation="5dp">
             <ImageView
+                android:id="@+id/play"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"

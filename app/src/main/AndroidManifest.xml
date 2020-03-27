@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tasbihpintar">
+    package="com.makeitation.tasbihpintar">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SplashScreen"
+        <activity android:name="com.makeitation.tasbihpintar.SplashScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -22,15 +22,15 @@
         </activity>
 
         <activity
-            android:name=".Panduan"
+            android:name="com.makeitation.tasbihpintar.Panduan"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.makeitation.tasbihpintar.MainActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.makeitation.tasbihpintar.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
 

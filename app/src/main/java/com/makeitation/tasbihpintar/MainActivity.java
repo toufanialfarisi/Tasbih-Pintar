@@ -4,6 +4,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     Typeface typeface;
     Switch switchGetar;
 
+
     // favorite refrence : https://github.com/wasabeef/awesome-android-ui
 
     @Override
@@ -65,17 +71,7 @@ public class MainActivity extends AppCompatActivity {
 	    // dokumentasi : https://pusher.com/tutorials/push-notifications-android
         PushNotifications.start(getApplicationContext(), "5e5cb362-53dd-4170-9b88-c4f1637f70d1");
         PushNotifications.addDeviceInterest("hello");
-
-        // trigger sesuatu saat menerima notifikasi
-        PushNotifications.setOnMessageReceivedListenerForVisibleActivity(this, new PushNotificationReceivedListener() {
-            @Override
-            public void onMessageReceived(@NotNull RemoteMessage remoteMessage) {
-                vibration(vibrator, 500);
-
-            }
-        });
         // cloud massaging
-
         // Tap Target View
 
         /*

@@ -4,6 +4,7 @@ Maka dengan adanya aplikasi ini, diharapkan mampu meningkatkan kualitas ibadah p
 dan taqwa selalu salah satunya dengan berdzikir. 
 
 ### Screenshots Aplikasi
+#### V2.0
 <table>
 	<tr>
 		<td>
@@ -15,8 +16,8 @@ dan taqwa selalu salah satunya dengan berdzikir.
 	</tr>
 </table>
 <br />
-<p>V2.5</p>
-<br/>
+
+#### V2.5
 <table>
 	<tr>
 		<td>

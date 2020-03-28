@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                             TapTarget.forView(findViewById(R.id.number), "Selanjutnya bacalah Tahlil 1x", " لَا إِلَهَ إِلَّا اَللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ  لَهُ اَلْمُلْكُ وَلَهُ اَلْحَمْدُ  وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ  ")
                                     .outerCircleColor(R.color.colorPrimary)
                                     .tintTarget(true)
-                                    .targetRadius(100)
+                                    .targetRadius(75)
                                     .textTypeface(font)
                                     .descriptionTextSize(45)
                                     .descriptionTextColor(R.color.putih), new TapTargetView.Listener(){

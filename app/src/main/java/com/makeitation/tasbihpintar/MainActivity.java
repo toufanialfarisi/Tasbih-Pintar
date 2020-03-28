@@ -31,7 +31,11 @@ import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.messaging.RemoteMessage;
+import com.pusher.pushnotifications.PushNotificationReceivedListener;
 import com.pusher.pushnotifications.PushNotifications;
+
+import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     TextView number, namaDzikir;
     RelativeLayout lay3, lay2;
     Vibrator vibrator;
+    Typeface typeface;
+    Switch switchGetar;
 
     // favorite refrence : https://github.com/wasabeef/awesome-android-ui
 
@@ -59,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
 	    // dokumentasi : https://pusher.com/tutorials/push-notifications-android
         PushNotifications.start(getApplicationContext(), "5e5cb362-53dd-4170-9b88-c4f1637f70d1");
         PushNotifications.addDeviceInterest("hello");
+
+        // trigger sesuatu saat menerima notifikasi
+        PushNotifications.setOnMessageReceivedListenerForVisibleActivity(this, new PushNotificationReceivedListener() {
+            @Override
+            public void onMessageReceived(@NotNull RemoteMessage remoteMessage) {
+                vibration(vibrator, 500);
+
+            }
+        });
         // cloud massaging
 
         // Tap Target View
@@ -75,34 +90,59 @@ public class MainActivity extends AppCompatActivity {
         Log.d("KONDISI", String.valueOf(booting));
         if (booting){
             // do something
+            // Tidak melakukan apa apa
         } else {
-
+            // SESSION
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("booting", "pertama_kali");
             editor.commit();
+            // SESSION
 
             Typeface typeface = getResources().getFont(R.font.myfont); // ganti font title bar
 
             // efek tap target untuk perkenalan fitur di aplikasi saat aplikasi pertama kali diinstal
             // https://github.com/KeepSafe/TapTargetView
+            final View view = findViewById(R.id.switchAB);
             new TapTargetSequence(this)
                     .targets(TapTarget.forView(findViewById(R.id.fab),"Tombol Reset", "Klik tombol ini untuk mereset counter ke nilai 0")
                                     .tintTarget(false)
                                     .descriptionTypeface(typeface)
+                                    .titleTypeface(typeface)
                                     .outerCircleColor(R.color.floatingColor),
                             TapTarget.forView(findViewById(R.id.play), "Tombol Play", "Klik tombol ini untuk memulai perhitungan dzikir")
                                     .tintTarget(false)
                                     .descriptionTypeface(typeface)
+                                    .titleTypeface(typeface)
                                     .targetRadius(70)
                                     .outerCircleColor(R.color.colorPrimary),
-                            TapTarget.forView(findViewById(R.id.card_view_2), "Link Bacaan", "Dapatkan panduan bacaan dzikir yang up to date")
+                            TapTarget.forView(findViewById(R.id.switchGetar), "Mode Getar", "Aktifkan mode getar saat berdzikir")
                                     .tintTarget(false)
+                                    .titleTypeface(typeface)
                                     .descriptionTypeface(typeface)
-                                    .outerCircleColor(R.color.panduan_bacaan))
+                                    .outerCircleColor(R.color.panduan_bacaan),
+                            TapTarget.forView(findViewById(R.id.number), "Bacaalah : ", "1. Tasbih (Subhanallah) 33x \n2. Tahmid (Alhamdulillah) 33x \n3. Takbir (Allahuakbar) 33x \n4. Tahlil 1x")
+                                    .tintTarget(true)
+                                    .descriptionTypeface(typeface)
+                                    .titleTypeface(typeface)
+                                    .outerCircleColor(R.color.bacaanSehat)
+                            )
                     .listener(new TapTargetSequence.Listener() {
                 @Override
                 public void onSequenceFinish() {
-                    Toast.makeText(MainActivity.this, "Selamat berdzikir :)", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this, "Selamat berdzikir :)", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder alBuilder = new AlertDialog.Builder(MainActivity.this);
+                    alBuilder.setTitle("Rasulullah bersabda")
+                            .setMessage("“Barangsiapa yang pada tiap-tiap usai shalat bertasbih (membaca subhanallah) sebanyak 33 kali bertahmid (membaca alhamdulillah) sebanyak 33 kali dan bertakbir (membaca Allahu akbar) sebanyak 33 kali maka jumlahnya 99 kali lalu menyempurnakannya menjadi 100 dengan bacaan: Laa Ilaaha Illallaahu Wahdahu Laa Syariikalahu Lahul Mulku Walahul Hamdu Wahuwa ‘Alaa Kulli Syai-in Qadiir, maka diampunilah kesalahan-kesalahannya walaupun kesalahannya seperti buih air laut.” (HR. Muslim)")
+                            .setCancelable(false)
+                            .setIcon(R.drawable.info)
+                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alertDialog = alBuilder.create();
+                    alBuilder.show();
                 }
 
                 @Override
@@ -118,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        // ini untuk full screen /  menghilangkan title bar
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -127,6 +168,21 @@ public class MainActivity extends AppCompatActivity {
 
         number = findViewById(R.id.number);
         namaDzikir = findViewById(R.id.pujian);
+
+        switchGetar = findViewById(R.id.switchGetar);
+        switchGetar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    getar = true;
+                    Toast.makeText(MainActivity.this, "Mode Getar ON", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    getar = false;
+                    Toast.makeText(MainActivity.this, "Mode Getar OFF", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         /*
         Atur nilai awalan nama zikir dan nilai counternya
@@ -161,13 +217,39 @@ public class MainActivity extends AppCompatActivity {
                 else if (counter == 99){
                     number.setText(String.valueOf(99));
                     vibration(vibrator, 500);
+
+                    Typeface font = getResources().getFont(R.font.myfont); // ganti font title bar
+                    TapTargetView.showFor(MainActivity.this,
+                            TapTarget.forView(findViewById(R.id.number), "Selanjutnya bacalah Tahlil 1x", " لَا إِلَهَ إِلَّا اَللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ  لَهُ اَلْمُلْكُ وَلَهُ اَلْحَمْدُ  وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ  ")
+                                    .outerCircleColor(R.color.colorPrimary)
+                                    .tintTarget(true)
+                                    .targetRadius(100)
+                                    .textTypeface(font)
+                                    .descriptionTextSize(45)
+                                    .descriptionTextColor(R.color.putih), new TapTargetView.Listener(){
+                                @Override
+                                public void onTargetClick(TapTargetView view){
+                                    super.onTargetClick(view);
+                                    counter = 0;
+                                    vibration(vibrator, 700);
+                                    number.setText(String.valueOf(counter));
+                                    namaDzikir.setText("Tasbih (سبحان الله)");
+                                }
+                            }
+                    );
+
                 } else if (counter == 100){
                     namaDzikir.setText("Tahlil");
                     number.setText(String.valueOf(counter));
+
+                    // berikan TapTargetView
+
+
                 } else if (counter == 101){
                     counter = 0;
                     vibration(vibrator, 700);
                     number.setText(String.valueOf(counter));
+                    namaDzikir.setText("Tasbih (سبحان الله)");
                 }
 
                 else {
@@ -226,22 +308,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_menu, menu);
-        MenuItem item = menu.findItem(R.id.switchId);
-        item.setActionView(R.layout.layout_switch);
-        Switch switchBtn = item.getActionView().findViewById(R.id.switchAB);
-        switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    getar = true;
-                    Toast.makeText(MainActivity.this, "Mode Getar ON", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    getar = false;
-                    Toast.makeText(MainActivity.this, "Mode Getar OFF", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        MenuItem item = menu.findItem(R.id.switchId);
+//        item.setActionView(R.layout.layout_switch);
+//        Switch switchBtn = item.getActionView().findViewById(R.id.switchAB);
+//        switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked){
+//                    getar = true;
+//                    Toast.makeText(MainActivity.this, "Mode Getar ON", Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    getar = false;
+//                    Toast.makeText(MainActivity.this, "Mode Getar OFF", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
         return true;
     }
 

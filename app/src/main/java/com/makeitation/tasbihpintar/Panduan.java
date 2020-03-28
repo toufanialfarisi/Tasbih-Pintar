@@ -82,9 +82,8 @@ public class Panduan extends AppCompatActivity {
         if (isConnected){
             Log.i("INTERNET : ", String.valueOf(isConnected));
             koneksi = true;
-            progress.setVisibility(View.VISIBLE);
             getDetailJson();
-
+            progress.setVisibility(View.VISIBLE);
 
         } else {
             koneksi = false;
@@ -95,7 +94,7 @@ public class Panduan extends AppCompatActivity {
             alertDialogBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            refreshIntent();
                         }
                     });
             alertDialogBuilder.show();
@@ -106,9 +105,7 @@ public class Panduan extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 finish();
-                overridePendingTransition(0, 0);
-                startActivity(getIntent());
-                overridePendingTransition(0, 0);
+                refreshIntent();
                 }
         };
         swipeRefreshLayout.setOnRefreshListener(refresh);
@@ -158,6 +155,12 @@ public class Panduan extends AppCompatActivity {
         recycle.setAdapter(dataAdapter);
         dataAdapter.notifyDataSetChanged();
         recycle.scheduleLayoutAnimation();
+    }
+
+    private void refreshIntent(){
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
     public void changeFontActionBar(){

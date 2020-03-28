@@ -5,9 +5,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
 import java.net.HttpURLConnection;
-
 import androidx.annotation.Nullable;
 
 public class StringRequest extends com.android.volley.toolbox.StringRequest {

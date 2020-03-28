@@ -55,6 +55,8 @@ dependencies {
     implementation "com.mlsdev.animatedrv:library:2.0.0"
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
 
 
 }

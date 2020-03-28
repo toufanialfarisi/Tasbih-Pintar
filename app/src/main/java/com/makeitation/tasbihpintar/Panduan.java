@@ -5,10 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import me.zhanghai.android.materialprogressbar.IndeterminateHorizontalProgressDrawable;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -22,30 +19,28 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mlsdev.animatedrv.AnimatedRecyclerView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class Panduan extends AppCompatActivity {
 
-    ArrayList<DataController> list = new ArrayList<>(); // Alokasikan memori untuk simpan list
-    AnimatedRecyclerView recycle;
-    DataAdapter dataAdapter;
-    SwipeRefreshLayout swipeRefreshLayout;
-    ProgressBar progressBar;
-    boolean koneksi = false;
-    String JSON_URL = "https://tasbih-pintar-backend-server.herokuapp.com/api";
-    ProgressBar progress;
+    private ArrayList<DataController> list = new ArrayList<>(); // Alokasikan memori untuk simpan list
+    private AnimatedRecyclerView recycle;
+    private DataAdapter dataAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBar;
+    private boolean koneksi = false;
+    private String JSON_URL = "https://tasbih-pintar-backend-server.herokuapp.com/api";
+    private ProgressBar progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,6 +182,5 @@ public class Panduan extends AppCompatActivity {
         // Finally, set the newly created TextView as ActionBar custom view
         ab.setCustomView(tv);
     }
-
 
 }

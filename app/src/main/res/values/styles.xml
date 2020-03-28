@@ -20,4 +20,12 @@
         <item name="font">@font/myfont</item>
     </style>
 
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_oval</item>
+        <item name="android:fontFamily">@font/myfont</item>
+    </style>
+
+    <style name="MyTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/myfont</item>
+    </style>
 </resources>

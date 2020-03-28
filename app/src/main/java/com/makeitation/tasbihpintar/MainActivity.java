@@ -1,15 +1,7 @@
 package com.makeitation.tasbihpintar;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +13,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,35 +23,29 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.messaging.RemoteMessage;
-import com.pusher.pushnotifications.PushNotificationReceivedListener;
 import com.pusher.pushnotifications.PushNotifications;
 
-import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView mBottomNav;
+
     private int counter = 0;
     private int initialCounter = 0;
     private boolean getar = false;
     private boolean refrences = false;
-    FloatingActionButton floatingActionButton ;
-    TextView number, namaDzikir;
-    RelativeLayout lay3, lay2;
-    Vibrator vibrator;
-    Typeface typeface;
-    Switch switchGetar;
 
+    private FloatingActionButton floatingActionButton ;
+    private TextView number, namaDzikir;
+    private RelativeLayout lay3, lay2;
+    private Vibrator vibrator;
+    private Typeface typeface;
+    private Switch switchGetar;
 
     // favorite refrence : https://github.com/wasabeef/awesome-android-ui
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -67,18 +54,18 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
         changeFontActionBar();
 
-        // cloud massaging
-	    // dokumentasi : https://pusher.com/tutorials/push-notifications-android
+        /*
+            Cloud Messaging
+            dokumentasi : https://pusher.com/tutorials/push-notifications-android
+        */
         PushNotifications.start(getApplicationContext(), "5e5cb362-53dd-4170-9b88-c4f1637f70d1");
         PushNotifications.addDeviceInterest("hello");
-        // cloud massaging
-        // Tap Target View
 
         /*
-        TOOLBAR
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
+            TOOLBAR
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
         */
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -95,9 +82,11 @@ public class MainActivity extends AppCompatActivity {
             // SESSION
 
             Typeface typeface = getResources().getFont(R.font.myfont); // ganti font title bar
+            /*
+                efek tap target untuk perkenalan fitur di aplikasi saat aplikasi pertama kali diinstal
+                https://github.com/KeepSafe/TapTargetView
+             */
 
-            // efek tap target untuk perkenalan fitur di aplikasi saat aplikasi pertama kali diinstal
-            // https://github.com/KeepSafe/TapTargetView
             final View view = findViewById(R.id.switchAB);
             new TapTargetSequence(this)
                     .targets(TapTarget.forView(findViewById(R.id.fab),"Tombol Reset", "Klik tombol ini untuk mereset counter ke nilai 0")
@@ -125,20 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     .listener(new TapTargetSequence.Listener() {
                 @Override
                 public void onSequenceFinish() {
-//                    Toast.makeText(MainActivity.this, "Selamat berdzikir :)", Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder alBuilder = new AlertDialog.Builder(MainActivity.this);
-                    alBuilder.setTitle("Rasulullah bersabda")
-                            .setMessage("“Barangsiapa yang pada tiap-tiap usai shalat bertasbih (membaca subhanallah) sebanyak 33 kali bertahmid (membaca alhamdulillah) sebanyak 33 kali dan bertakbir (membaca Allahu akbar) sebanyak 33 kali maka jumlahnya 99 kali lalu menyempurnakannya menjadi 100 dengan bacaan: Laa Ilaaha Illallaahu Wahdahu Laa Syariikalahu Lahul Mulku Walahul Hamdu Wahuwa ‘Alaa Kulli Syai-in Qadiir, maka diampunilah kesalahan-kesalahannya walaupun kesalahannya seperti buih air laut.” (HR. Muslim)")
-                            .setCancelable(false)
-                            .setIcon(R.drawable.info)
-                            .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                    AlertDialog alertDialog = alBuilder.create();
-                    alBuilder.show();
+                    dialogForm(R.layout.hadis, R.id.hadis, "Rasulullah bersabda");
                 }
 
                 @Override
@@ -153,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
             }).start();
 
         }
-
         // ini untuk full screen /  menghilangkan title bar
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -181,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /*
-        Atur nilai awalan nama zikir dan nilai counternya
+            Atur nilai awalan nama zikir dan nilai counternya
          */
         final String firstVal = String.valueOf(initialCounter);
         number.setText(firstVal);
@@ -209,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
                     number.setText(String.valueOf(67));
 
                 }
-
                 else if (counter == 99){
                     number.setText(String.valueOf(99));
                     vibration(vibrator, 500);
@@ -237,9 +211,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (counter == 100){
                     namaDzikir.setText("Tahlil");
                     number.setText(String.valueOf(counter));
-
-                    // berikan TapTargetView
-
 
                 } else if (counter == 101){
                     counter = 0;
@@ -283,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
 
 /*
         Fragment Bottom navigation
+        import com.google.android.material.bottomnavigation.BottomNavigationView;
 
         mBottomNav = findViewById(R.id.navigation);
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -304,46 +276,56 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_menu, menu);
-//        MenuItem item = menu.findItem(R.id.switchId);
-//        item.setActionView(R.layout.layout_switch);
-//        Switch switchBtn = item.getActionView().findViewById(R.id.switchAB);
-//        switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked){
-//                    getar = true;
-//                    Toast.makeText(MainActivity.this, "Mode Getar ON", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    getar = false;
-//                    Toast.makeText(MainActivity.this, "Mode Getar OFF", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        /*
+            MenuItem item = menu.findItem(R.id.switchId);
+            item.setActionView(R.layout.layout_switch);
+            Switch switchBtn = item.getActionView().findViewById(R.id.switchAB);
+            switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        getar = true;
+                        Toast.makeText(MainActivity.this, "Mode Getar ON", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        getar = false;
+                        Toast.makeText(MainActivity.this, "Mode Getar OFF", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        */
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.about:
-                AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
-                alBuilder.setTitle("About")
-                        .setMessage("Tasbih Pintar adalah aplikasi yang memudahkan kita semua sebagai umat muslim untuk berdzikir. Dengan adanya aplikasi ini, diharapkan semua yang menggunakan ini bisa meningkatkan ibadah kepada Allah SWT. \n\n*Dibuat dengan cinta dan iman*\nCreated by Hamba Allah Dev")
-                        .setCancelable(false)
-                        .setIcon(R.drawable.info)
-                        .setPositiveButton("Tutup", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = alBuilder.create();
-                alBuilder.show();
 
+            case R.id.about:
+                dialogForm(R.layout.about, R.id.about, "About");
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void dialogForm(int layout ,int resourceId, String title){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialog);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(layout, null);
+        dialog.setView(dialogView);
+        dialog.setCancelable(true);
+        dialog.setIcon(R.drawable.info);
+        dialog.setTitle(title);
+         TextView text = (TextView) dialogView.findViewById(resourceId);
+         dialog.setPositiveButton("tutup", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+                 dialog.cancel();
+             }
+         });
+         dialog.show();
+
     }
 
     private void vibration(Vibrator vibrator, int volume){
@@ -374,5 +356,7 @@ public class MainActivity extends AppCompatActivity {
         // Finally, set the newly created TextView as ActionBar custom view
         ab.setCustomView(tv);
     }
+
+
 
 }

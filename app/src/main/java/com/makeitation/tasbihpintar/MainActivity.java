@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean booting = sharedPreferences.contains("booting");
         Log.d("KONDISI", String.valueOf(booting));
-        if (!booting){
+        if (booting){
             // do nothing
         } else {
 

@@ -30,16 +30,7 @@ dan taqwa selalu salah satunya dengan berdzikir.
 			<img src="screenshots/v2-5-3.jpg" width="150px"/>  
 		</td>
 		<td>
-			<img src="screenshots/v2-5-4.jpg" width="150px"/>
-		</td>
-		<td>
 			<img src="screenshots/v2-5-5.jpg" width="150px"/>  
-		</td>
-		<td>
-			<img src="screenshots/v2-5-6.jpg" width="150px"/>
-		</td>
-		<td>
-			<img src="screenshots/v2-5-7.jpg" width="150px"/>
 		</td>
 	</tr>
 </table>

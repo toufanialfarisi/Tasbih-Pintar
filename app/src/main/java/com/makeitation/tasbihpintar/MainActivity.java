@@ -71,15 +71,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean booting = sharedPreferences.contains("booting");
         Log.d("KONDISI", String.valueOf(booting));
-        if (booting){
-            // do something
-            // Tidak melakukan apa apa
+        if (!booting){
+            // do nothing
         } else {
-            // SESSION
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("booting", "pertama_kali");
-            editor.commit();
-            // SESSION
 
             Typeface typeface = getResources().getFont(R.font.myfont); // ganti font title bar
             /*
@@ -114,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
                     .listener(new TapTargetSequence.Listener() {
                 @Override
                 public void onSequenceFinish() {
-                    dialogForm(R.layout.hadis, R.id.hadis, "Rasulullah bersabda");
+                    dialogForm(R.layout.hadis, R.id.hadis, "Rasulullah bersabda", true);
+
                 }
 
                 @Override
@@ -127,6 +122,17 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }).start();
+
+            /*
+                Setelah user membaca panduan yang disajikan dalam bentuk
+                TapTargetView, maka simpan status bootingnya ke SharedPreference
+                agar TapTargetView hanya muncul sekali saja saat aplikasi
+                pertama kali dijalankan setelah instalasi.
+             */
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("booting", "pertama_kali");
+                editor.commit();
+            // SESSION
 
         }
         // ini untuk full screen /  menghilangkan title bar
@@ -303,13 +309,13 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
 
             case R.id.about:
-                dialogForm(R.layout.about, R.id.about, "About");
+                dialogForm(R.layout.about, R.id.about, "About", false);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void dialogForm(int layout ,int resourceId, String title){
+    private void dialogForm(int layout ,int resourceId, String title, final boolean isToasAvail){
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialog);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(layout, null);
@@ -321,6 +327,12 @@ public class MainActivity extends AppCompatActivity {
          dialog.setPositiveButton("tutup", new DialogInterface.OnClickListener() {
              @Override
              public void onClick(DialogInterface dialog, int which) {
+                 if (isToasAvail == true){
+                     Toast.makeText(MainActivity.this, "Selamat Berdzikir", Toast.LENGTH_SHORT).show();
+                 } else {
+                     // do nothing
+                 }
+
                  dialog.cancel();
              }
          });

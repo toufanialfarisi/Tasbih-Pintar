@@ -16,7 +16,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "history";
     private static final String ID_COL = "id";
     private static final String NAME_COL = "frekuensi";
-    private static final String DATE_COL = "date";
+    private static final String TABLE_NAME_2 = "date";
     private SQLiteDatabase db;
     public ArrayList<Integer> list;
     public DBHandler(@Nullable Context context) {
@@ -28,11 +28,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE history (id INTEGER PRIMARY KEY AUTOINCREMENT,frekuensi INTEGER)";
         db.execSQL(query);
+        String query2 = "CREATE TABLE datetime (id INTEGER PRIMARY KEY AUTOINCREMENT,date TEXT)";
+        db.execSQL(query2);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE  " + TABLE_NAME);
+        db.execSQL("DROP TABLE datetime");
         onCreate(db);
     }
 
@@ -50,6 +53,15 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void insertDate(String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NAME_COL, date);
+        db.insert("datetime", null, values);
+        db.close();
+        Log.i("DATE RECORD", "BERHASIL MEMASUKAN DATE");
+    }
+
     public void deleteRecord(){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
@@ -58,6 +70,22 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<Integer> getRecord() {
         list = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                int val = cursor.getInt(cursor.getColumnIndex(NAME_COL));
+                list.add(val);
+                cursor.moveToNext();
+            }
+        }
+        Log.i("QUERY DB", String.valueOf(list));
+        return list;
+    }
+
+    public ArrayList<Integer> getDateRecord() {
+        list = new ArrayList<>();
+        String query = "SELECT * FROM datetime";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {

@@ -122,11 +122,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSequenceFinish() {
                     dialogForm(R.layout.hadis, R.id.hadis, "Rasulullah bersabda", true);
-
                 }
 
                 @Override
                 public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+                    vibration(vibrator, 80);
 
                 }
 
@@ -376,6 +376,7 @@ public class MainActivity extends AppCompatActivity {
              public void onClick(DialogInterface dialog, int which) {
                  if (isToasAvail == true){
                      Toast.makeText(MainActivity.this, "Selamat Berdzikir", Toast.LENGTH_SHORT).show();
+                     vibration(vibrator, 700);
                  } else {
                      // do nothing
                  }

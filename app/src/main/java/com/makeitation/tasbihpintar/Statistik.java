@@ -10,7 +10,11 @@ import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * TODO : Membuat statistik frequency tasbih yang sudah dilakukan dalam bentuk grafik
@@ -27,8 +31,8 @@ public class Statistik extends AppCompatActivity {
     private static final String TABLE_NAME = "history";
     TextView numberPenyelesaian, numberPersentasi, nilai, keteranganNilai, emot;
     DBHandler db;
-    CalendarView calendarView;
     ArrayList<Integer> list;
+    ArrayList<Integer> dateList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +43,9 @@ public class Statistik extends AppCompatActivity {
         nilai = findViewById(R.id.nilai);
         keteranganNilai = findViewById(R.id.keterangan_nilai);
         emot = findViewById(R.id.emot);
-
+        MaterialCalendarView materialCalendarView = findViewById(R.id.calendar);
         numberPersentasi = findViewById(R.id.number_persentasi);
-        calendarView = findViewById(R.id.calendar);
-        SQLiteDatabase dbase;
+
         db = new DBHandler(this);
         list = db.getRecord();
 
@@ -50,6 +53,16 @@ public class Statistik extends AppCompatActivity {
 
         for (int i : list){
             sumResult += i;
+        }
+        dateList = db.getDateRecord();
+        for (int j : dateList){
+            Log.i("DATELIST", String.valueOf(j));
+        }
+        if (sumResult == 1){
+
+            db.insertDate(String.valueOf(CalendarDay.today()));
+            materialCalendarView.setDateSelected(CalendarDay.today(), true);
+            Log.i("TODAY", String.valueOf(CalendarDay.today()));
         }
 
         Log.i("QUERY", String.valueOf(list));
@@ -68,11 +81,16 @@ public class Statistik extends AppCompatActivity {
         numberPenyelesaian.setText(String.valueOf(sumResult) + "/5");
         numberPersentasi.setText(String.valueOf(persentase) + "%");
 
-        if (sumResult < 4 ){
+        if (sumResult < 3 ){
             emot.setText(":(");
             nilai.setText("Tingkatkan lagi");
             keteranganNilai.setText("Dzikirlah setiap selesai sholat fardhu");
-        } else if (sumResult >= 4){
+        } else if (sumResult == 3){
+            emot.setText(":|");
+            nilai.setText("Sedikit lagi");
+            keteranganNilai.setText("Ayo terus tingkatkan dzikirnya");
+        }
+        else if (sumResult >= 4){
             emot.setText(":)");
             nilai.setText("Luar Biasa");
             keteranganNilai.setText("Tetaplah istiqomah dzikir selesai sholat fardhu ");

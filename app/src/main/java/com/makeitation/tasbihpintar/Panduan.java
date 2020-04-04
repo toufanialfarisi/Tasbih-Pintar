@@ -84,6 +84,7 @@ public class Panduan extends AppCompatActivity {
             koneksi = true;
             getDetailJson();
             progress.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(true);
 
         } else {
             koneksi = false;
@@ -130,6 +131,7 @@ public class Panduan extends AppCompatActivity {
                         viewResult(list);
 
                         progress.setVisibility(View.INVISIBLE);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                 } catch (JSONException e) {

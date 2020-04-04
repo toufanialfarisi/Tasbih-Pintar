@@ -45,10 +45,10 @@ dan taqwa selalu salah satunya dengan berdzikir.
 			<img src="screenshots/v3.0/v3-2.jpg" width="150px"/>  
 		</td>
 		<td>
-			<img src="screenshots/v3.0/v3-3.jpg" width="150px"/>  
+			<img src="screenshots/v3.0/v3-5.jpg" width="150px"/>  
 		</td>
 		<td>
-			<img src="screenshots/v3.0/v3-5.jpg" width="150px"/>  
+			<img src="screenshots/v3.0/v3-3.jpg" width="150px"/>  
 		</td>
 		<td>
 			<img src="screenshots/v3.0/v3-4.jpg" width="150px"/>  

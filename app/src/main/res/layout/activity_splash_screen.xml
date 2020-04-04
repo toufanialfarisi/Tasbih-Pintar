@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_marginLeft="40dp"
-            android:text="Versi 2.5"
+            android:text="Versi 3.0"
             android:textSize="20dp"
             android:fontFamily="@font/myfont"
             android:textColor="#FFFFFF"

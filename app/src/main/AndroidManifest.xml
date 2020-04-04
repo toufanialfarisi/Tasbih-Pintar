@@ -2,12 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.makeitation.tasbihpintar">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/tasbih_pintar_new_icon"
@@ -15,19 +9,28 @@
         android:roundIcon="@mipmap/tasbih_pintar_new_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="com.makeitation.tasbihpintar.SplashScreen"
+        <activity
+            android:name=".Statistik"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.makeitation.tasbihpintar.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SplashScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.makeitation.tasbihpintar.Panduan"
+            android:name=".Panduan"
+            android:theme="@style/AppTheme"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <meta-data
@@ -35,13 +38,15 @@
                 android:value="com.makeitation.tasbihpintar.MainActivity" />
         </activity>
         <activity
-            android:name="com.makeitation.tasbihpintar.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

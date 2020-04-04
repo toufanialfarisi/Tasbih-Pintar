@@ -2,9 +2,12 @@ package com.makeitation.tasbihpintar;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -17,7 +20,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CalendarView;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -44,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private Vibrator vibrator;
     private Typeface typeface;
     private Switch switchGetar;
+    private DBHandler db;
+    public int save_value;
+    public int output;
 
     // favorite refrence : https://github.com/wasabeef/awesome-android-ui
     @Override
@@ -51,8 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
-        changeFontActionBar();
+
+        // database
+        db = new DBHandler(getApplicationContext());
+
+//        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
+//        changeFontActionBar();
 
         /*
             Cloud Messaging
@@ -61,12 +73,13 @@ public class MainActivity extends AppCompatActivity {
         PushNotifications.start(getApplicationContext(), "5e5cb362-53dd-4170-9b88-c4f1637f70d1");
         PushNotifications.addDeviceInterest("hello");
 
-        /*
-            TOOLBAR
-            Toolbar toolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
-        */
+        // untuk ganti warna icon status bar
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        // TOOLBAR
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean booting = sharedPreferences.contains("booting");
@@ -167,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
         final String firstVal = String.valueOf(initialCounter);
         number.setText(firstVal);
         namaDzikir.setText("Tasbih (سبحان الله)");
-
         lay3 = findViewById(R.id.lay3);
         lay3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                     number.setText(String.valueOf(33));
 
                 } else if (counter == 34){
+                    vibration(vibrator, 55);
                     namaDzikir.setText("Tahmid (الحمدلله)");
                     number.setText(String.valueOf(34));
 
@@ -186,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                     vibration(vibrator, 500);
                     number.setText(String.valueOf(66));
                 } else if (counter == 67){
+                    vibration(vibrator, 55);
                     namaDzikir.setText("Takbir (الله أكبر)");
                     number.setText(String.valueOf(67));
 
@@ -212,13 +226,26 @@ public class MainActivity extends AppCompatActivity {
                                     namaDzikir.setText("Tasbih (سبحان الله)");
                                 }
                             }
+
                     );
+                    CalendarView calendarView = new CalendarView(getApplicationContext());
+                    Log.i("CALENDAR", String.valueOf(calendarView.getDate()));
+                    save_value = 1;
+                    db.insertRecord(save_value);
+//                    output = db.getRecord();
+                    Log.i("insertDatabase", "Inserted to db");
+//                    Log.i("getDatabase", String.valueOf(db.getRecord()));
+
+
 
                 } else if (counter == 100){
                     namaDzikir.setText("Tahlil");
                     number.setText(String.valueOf(counter));
 
+
                 } else if (counter == 101){
+
+
                     counter = 0;
                     vibration(vibrator, 700);
                     number.setText(String.valueOf(counter));
@@ -279,6 +306,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void statusBarColor(){
+        Window window = getWindow();
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        // finally change the color
+        window.setStatusBarColor(getColor(R.color.end));
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_menu, menu);
@@ -310,6 +349,14 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.about:
                 dialogForm(R.layout.about, R.id.about, "About", false);
+                break;
+
+            case R.id.stat:
+                Intent intent = new Intent(MainActivity.this, Statistik.class);
+                intent.putExtra(Statistik.FREKUENSI, output);
+                startActivity(intent);
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);

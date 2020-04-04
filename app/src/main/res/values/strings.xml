@@ -2,4 +2,5 @@
     <string name="app_name">Tasbih Pintar</string>
     <string name="About">Tasbih Pintar adalah aplikasi yang memudahkan kita semua sebagai umat muslim untuk berdzikir. Dengan adanya aplikasi ini, diharapkan semua yang menggunakan ini bisa meningkatkan ibadah kepada Allah SWT. \n\n*Dibuat dengan cinta dan iman*\nCreated by Hamba Allah Dev</string>
     <string name="hadis">“Barangsiapa yang pada tiap-tiap usai shalat bertasbih (membaca subhanallah) sebanyak 33 kali bertahmid (membaca alhamdulillah) sebanyak 33 kali dan bertakbir (membaca Allahu akbar) sebanyak 33 kali maka jumlahnya 99 kali lalu menyempurnakannya menjadi 100 dengan bacaan: Laa Ilaaha Illallaahu Wahdahu Laa Syariikalahu Lahul Mulku Walahul Hamdu Wahuwa ‘Alaa Kulli Syai-in Qadiir, maka diampunilah kesalahan-kesalahannya walaupun kesalahannya seperti buih air laut.” (HR. Muslim)</string>
+    <string name="font">font/lexend.ttf</string>
 </resources>

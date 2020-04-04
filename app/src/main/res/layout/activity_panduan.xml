@@ -3,9 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/putih"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/putih"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:subtitleTextColor="@color/black"
+            app:titleTextColor="@android:color/black" />
         <ProgressBar
+            android:layout_below="@id/toolbar"
             android:id="@+id/progress"
             android:layout_marginTop="25dp"
             android:layout_width="wrap_content"
@@ -15,6 +25,7 @@
 
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_below="@id/toolbar"
             android:layout_marginTop="5dp"
             android:id="@+id/refresh_list"
             android:layout_height="match_parent"

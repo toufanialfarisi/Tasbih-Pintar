@@ -3,6 +3,7 @@ package com.makeitation.tasbihpintar;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -49,9 +50,13 @@ public class Panduan extends AppCompatActivity {
         progress = findViewById(R.id.progress);
         recycle = findViewById(R.id.recview);
         recycle.setHasFixedSize(true);
-        changeFontActionBar();
+//        changeFontActionBar();
 
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
 
 
         // ANIMASI DOWN TO UP
@@ -65,8 +70,8 @@ public class Panduan extends AppCompatActivity {
                 .build();
         // ANIMASI DOWN TO UP
 
-        getSupportActionBar().setTitle("Panduan Bacaan Lengkap");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("Panduan Bacaan Lengkap");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ConnectivityManager cm =
                 (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);

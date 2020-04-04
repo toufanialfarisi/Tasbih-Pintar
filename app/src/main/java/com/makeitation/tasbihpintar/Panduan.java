@@ -56,7 +56,7 @@ public class Panduan extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient_card));
+        getSupportActionBar().setTitle("Panduan Bacaan");
 
 
         // ANIMASI DOWN TO UP
